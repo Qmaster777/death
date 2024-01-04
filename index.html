@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простая HTML-страница</title>
+</head>
+<body>
+    <h1 id="numberDisplay">Число: 0</h1>
+
+    <!-- Кнопки для увеличения и уменьшения числа -->
+    <button onclick="updateNumber(1)">+1</button>
+    <button onclick="updateNumber(-1)">-1</button>
+
+    <script>
+        // Функция для обновления числа
+        function updateNumber(value) {
+            // Получаем текущее значение числа из локального хранилища браузера
+            var currentNumber = localStorage.getItem('savedNumber') || 0;
+
+            // Преобразуем текущее значение в число
+            currentNumber = parseInt(currentNumber);
+
+            // Увеличиваем или уменьшаем значение числа
+            var newNumber = currentNumber + value;
+
+            // Обновляем отображаемое значение на странице
+            document.getElementById('numberDisplay').innerText = 'Число: ' + newNumber;
+
+            // Сохраняем новое значение в локальное хранилище браузера
+            localStorage.setItem('savedNumber', newNumber);
+        }
+
+        // Загружаем сохраненное значение при загрузке страницы
+        window.onload = function() {
+            var savedNumber = localStorage.getItem('savedNumber') || 0;
+            document.getElementById('numberDisplay').innerText = 'Число: ' + savedNumber;
+        };
+    </script>
+</body>
+</html>
+
